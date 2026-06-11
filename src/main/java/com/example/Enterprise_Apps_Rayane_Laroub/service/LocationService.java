@@ -5,6 +5,7 @@ import com.example.Enterprise_Apps_Rayane_Laroub.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LocationService {
@@ -19,5 +20,8 @@ public class LocationService {
         return repository.findAll();
     }
 
+    public Location findById(UUID id) {
+        return repository.findById(id).orElse(null);
+    }
 
 }
