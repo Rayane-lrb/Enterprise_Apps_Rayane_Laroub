@@ -1,6 +1,6 @@
 package com.example.Enterprise_Apps_Rayane_Laroub.repository;
 
-import com.example.Enterprise_Apps_Rayane_Laroub.domain.entity.Location;
+import com.example.Enterprise_Apps_Rayane_Laroub.entity.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

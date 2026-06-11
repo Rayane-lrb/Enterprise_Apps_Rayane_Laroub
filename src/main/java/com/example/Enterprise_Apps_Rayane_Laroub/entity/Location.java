@@ -1,4 +1,4 @@
-package com.example.Enterprise_Apps_Rayane_Laroub.domain.entity;
+package com.example.Enterprise_Apps_Rayane_Laroub.entity;
 
 import jakarta.persistence.*;
 
