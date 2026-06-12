@@ -2,6 +2,7 @@ package com.example.Enterprise_Apps_Rayane_Laroub.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +24,9 @@ public class Location {
 
     @Column(name = "capacity", nullable = false)
     private int capacity;
+
+    @OneToMany(mappedBy = "location")
+    private List<Event> events;
 
     public Location() {
     }
