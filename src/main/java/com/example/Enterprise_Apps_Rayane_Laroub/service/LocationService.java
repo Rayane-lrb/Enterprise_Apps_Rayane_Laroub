@@ -1,6 +1,6 @@
 package com.example.Enterprise_Apps_Rayane_Laroub.service;
 
-import com.example.Enterprise_Apps_Rayane_Laroub.entity.Location;
+import com.example.Enterprise_Apps_Rayane_Laroub.dto.location.LocationResponse;
 import com.example.Enterprise_Apps_Rayane_Laroub.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,26 @@ public class LocationService {
     }
 
 
-    public List<Location> findAll() {
-        return repository.findAll();
+    public List<LocationResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(location -> new LocationResponse(
+                        location.getId(),
+                        location.getName(),
+                        location.getAddress(),
+                        location.getCapacity()
+                ))
+                .toList();
     }
 
-    public Location findById(UUID id) {
-        return repository.findById(id).orElse(null);
+    public LocationResponse findById(UUID id) {
+        return repository.findById(id)
+                .map(location -> new LocationResponse(
+                        location.getId(),
+                        location.getName(),
+                        location.getAddress(),
+                        location.getCapacity()
+                ))
+                .orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
     }
-
 }
