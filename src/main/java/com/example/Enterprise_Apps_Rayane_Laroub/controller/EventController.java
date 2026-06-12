@@ -1,50 +1,48 @@
 package com.example.Enterprise_Apps_Rayane_Laroub.controller;
 
 import com.example.Enterprise_Apps_Rayane_Laroub.dto.event.EventRequest;
-import com.example.Enterprise_Apps_Rayane_Laroub.dto.event.EventResponse;
-import com.example.Enterprise_Apps_Rayane_Laroub.entity.Event;
 import com.example.Enterprise_Apps_Rayane_Laroub.service.EventService;
-import org.springframework.http.HttpStatus;
+import com.example.Enterprise_Apps_Rayane_Laroub.service.LocationService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 public class EventController {
 
-    private EventService service;
+    private EventService eventService;
+    private LocationService locationService;
 
-    public EventController(EventService service) {
-        this.service = service;
+    public EventController(EventService eventService, LocationService locationService) {
+        this.eventService = eventService;
+        this.locationService = locationService;
     }
 
-    @GetMapping
-    @RequestMapping("/evenmenten")
-    public List<EventResponse> findAll() {
-        return service.findAll();
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("events", eventService.findAll());
+        return "index";
     }
 
-    @GetMapping
-    @RequestMapping("/evenmenten/{id}")
-    public EventResponse findById(@PathVariable UUID id) {
-        return service.findById(id);
+    @GetMapping("/events/{id}")
+    public String show(@PathVariable UUID id, Model model) {
+        model.addAttribute("event", eventService.findById(id));
+        return "details";
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public EventResponse save(EventRequest request) {
-        return service.save(request);
+    @GetMapping("/events/new")
+    public String create(Model model) {
+        model.addAttribute("locations", locationService.findAll());
+        return "create";
     }
 
-    @PutMapping("/evenmenten/{id}")
-    public EventResponse update(EventRequest request, @PathVariable UUID id) {
-        return service.update(id, request);
+    @PostMapping("/events")
+    public String store(@ModelAttribute EventRequest event, Model model) {
+        model.addAttribute("event", eventService.save(event));
+        return "redirect:/";
     }
 
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
-        service.deleteEvent(id);
-    }
 }
