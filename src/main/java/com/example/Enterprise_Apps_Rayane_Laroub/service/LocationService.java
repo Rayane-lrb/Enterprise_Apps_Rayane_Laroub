@@ -1,6 +1,8 @@
 package com.example.Enterprise_Apps_Rayane_Laroub.service;
 
+import com.example.Enterprise_Apps_Rayane_Laroub.dto.location.LocationRequest;
 import com.example.Enterprise_Apps_Rayane_Laroub.dto.location.LocationResponse;
+import com.example.Enterprise_Apps_Rayane_Laroub.entity.Location;
 import com.example.Enterprise_Apps_Rayane_Laroub.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,17 @@ public class LocationService {
                         location.getCapacity()
                 ))
                 .orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
+    }
+
+    public Location CreateLocation(LocationRequest locationRequest) {
+
+        Location location = new Location(
+                locationRequest.name(),
+                locationRequest.address(),
+                locationRequest.capacity()
+        );
+
+        return repository.save(location);
+
     }
 }
