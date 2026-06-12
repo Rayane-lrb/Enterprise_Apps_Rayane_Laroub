@@ -20,13 +20,13 @@ public class EventController {
     }
 
     @GetMapping
-    @RequestMapping("/events")
+    @RequestMapping("/evenmenten")
     public List<EventResponse> findAll() {
         return service.findAll();
     }
 
     @GetMapping
-    @RequestMapping("/events/{id}")
+    @RequestMapping("/evenmenten/{id}")
     public EventResponse findById(@PathVariable UUID id) {
         return service.findById(id);
     }
@@ -37,7 +37,7 @@ public class EventController {
         return service.save(request);
     }
 
-    @PutMapping("/events/{id}")
+    @PutMapping("/evenmenten/{id}")
     public EventResponse update(EventRequest request, @PathVariable UUID id) {
         return service.update(id, request);
     }
@@ -47,5 +47,4 @@ public class EventController {
     public void delete(@PathVariable UUID id) {
         service.deleteEvent(id);
     }
-
 }
