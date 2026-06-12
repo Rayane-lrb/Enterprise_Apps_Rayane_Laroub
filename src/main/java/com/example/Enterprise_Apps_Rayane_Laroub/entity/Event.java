@@ -20,13 +20,13 @@ public class Event {
     String title;
 
     @Column(name = "description", nullable = false)
-    String descirption;
+    String description;
 
     @Column(name = "email", nullable = false)
     String email;
 
     @Column(name = "organisation")
-    String oragnisation;
+    String organisation;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -34,16 +34,13 @@ public class Event {
 
 
 
-    public Event() {
-    }
-
-    public Event(UUID id, LocalDateTime time, String title, String descirption, String email, String oragnisation, Location location) {
-        this.id = id;
+    public Event() {}
+    public Event(LocalDateTime time, String title, String description, String organisation, String email, Location location) {
         this.time = time;
         this.title = title;
-        this.descirption = descirption;
+        this.description = description;
+        this.organisation = organisation;
         this.email = email;
-        this.oragnisation = oragnisation;
         this.location = location;
     }
 
@@ -71,12 +68,12 @@ public class Event {
         this.title = title;
     }
 
-    public String getDescirption() {
-        return descirption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescirption(String descirption) {
-        this.descirption = descirption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEmail() {
@@ -87,12 +84,12 @@ public class Event {
         this.email = email;
     }
 
-    public String getOragnisation() {
-        return oragnisation;
+    public String getOrganisation() {
+        return organisation;
     }
 
-    public void setOragnisation(String oragnisation) {
-        this.oragnisation = oragnisation;
+    public void setOrgnisation(String orgnisation) {
+        this.organisation = orgnisation;
     }
 
     public Location getLocation() {
@@ -107,12 +104,12 @@ public class Event {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(id, event.id) && Objects.equals(time, event.time) && Objects.equals(title, event.title) && Objects.equals(descirption, event.descirption) && Objects.equals(email, event.email) && Objects.equals(oragnisation, event.oragnisation) && Objects.equals(location, event.location);
+        return Objects.equals(id, event.id) && Objects.equals(time, event.time) && Objects.equals(title, event.title) && Objects.equals(description, event.description) && Objects.equals(email, event.email) && Objects.equals(organisation, event.organisation) && Objects.equals(location, event.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, time, title, descirption, email, oragnisation, location);
+        return Objects.hash(id, time, title, description, email, organisation, location);
     }
 
     @Override
@@ -121,9 +118,9 @@ public class Event {
                 "id=" + id +
                 ", time=" + time +
                 ", title='" + title + '\'' +
-                ", descirption='" + descirption + '\'' +
+                ", description='" + description + '\'' +
                 ", email='" + email + '\'' +
-                ", oragnisation='" + oragnisation + '\'' +
+                ", organisation='" + organisation + '\'' +
                 ", location=" + location +
                 '}';
     }
