@@ -32,7 +32,21 @@ public class EventService {
                 )).toList();
     }
 
-    public EventResponse createEvent(EventRequest request) {
+    public EventResponse findById(UUID id) {
+        Event event = eventRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        return new EventResponse(
+                event.getId(),
+                event.getTime(),
+                event.getTitle(),
+                event.getDescription(),
+                event.getOrganisation(),
+                event.getEmail(),
+                event.getLocation()
+        );
+
+    }
+
+    public EventResponse save(EventRequest request) {
         Event event = new Event(
                 request.time(),
                 request.title(),
