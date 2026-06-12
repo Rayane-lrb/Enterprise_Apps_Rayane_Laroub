@@ -78,5 +78,10 @@ public class EventService {
     }
 
 
+    public void deleteEvent(UUID id) {
+        Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Event not found with id: " + id));
+
+        eventRepository.delete(event);
+    }
 
 }
