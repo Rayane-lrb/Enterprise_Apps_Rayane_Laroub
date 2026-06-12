@@ -18,7 +18,7 @@ public class LocationService {
     }
 
 
-    public List<LocationResponse> LocationfindAll() {
+    public List<LocationResponse> findAll() {
         return repository.findAll()
                 .stream()
                 .map(location -> new LocationResponse(
@@ -30,7 +30,7 @@ public class LocationService {
                 .toList();
     }
 
-    public LocationResponse LocationfindById(UUID id) {
+    public LocationResponse findById(UUID id) {
         return repository.findById(id)
                 .map(location -> new LocationResponse(
                         location.getId(),
