@@ -41,7 +41,7 @@ public class LocationService {
                 .orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
     }
 
-    public Location CreateLocation(LocationRequest locationRequest) {
+    public LocationResponse CreateLocation(LocationRequest locationRequest) {
 
         Location location = new Location(
                 locationRequest.name(),
@@ -49,8 +49,14 @@ public class LocationService {
                 locationRequest.capacity()
         );
 
-        return repository.save(location);
+        Location saved = repository.save(location);
 
+        return new LocationResponse(
+                saved.getId(),
+                saved.getName(),
+                saved.getAddress(),
+                saved.getCapacity()
+        );
     }
 
     public LocationResponse UpdateLocation(UUID id, LocationRequest locationRequest) {
