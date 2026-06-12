@@ -42,4 +42,10 @@ public class EventController {
         return service.update(id, request);
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        service.deleteEvent(id);
+    }
+
 }
