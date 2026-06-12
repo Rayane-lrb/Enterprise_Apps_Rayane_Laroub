@@ -6,6 +6,8 @@ import com.example.Enterprise_Apps_Rayane_Laroub.entity.Event;
 import com.example.Enterprise_Apps_Rayane_Laroub.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventService {
 
@@ -13,6 +15,20 @@ public class EventService {
 
     public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
+    }
+
+    public List<EventResponse> findAll() {
+        return eventRepository.findAll()
+                .stream()
+                .map(event -> new EventResponse(
+                        event.getId(),
+                        event.getTime(),
+                        event.getTitle(),
+                        event.getDescription(),
+                        event.getOrganisation(),
+                        event.getEmail(),
+                        event.getLocation()
+                )).toList();
     }
 
     public EventResponse createEvent(EventRequest request) {
