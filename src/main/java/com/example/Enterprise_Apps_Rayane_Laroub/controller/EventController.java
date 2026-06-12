@@ -37,6 +37,9 @@ public class EventController {
         return service.save(request);
     }
 
-
+    @PutMapping("/events/{id}")
+    public EventResponse update(EventRequest request, @PathVariable UUID id) {
+        return service.update(id, request);
+    }
 
 }
