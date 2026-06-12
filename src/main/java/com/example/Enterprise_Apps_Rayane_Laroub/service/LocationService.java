@@ -18,7 +18,7 @@ public class LocationService {
     }
 
 
-    public List<LocationResponse> findAll() {
+    public List<LocationResponse> LocationfindAll() {
         return repository.findAll()
                 .stream()
                 .map(location -> new LocationResponse(
@@ -30,7 +30,7 @@ public class LocationService {
                 .toList();
     }
 
-    public LocationResponse findById(UUID id) {
+    public LocationResponse LocationfindById(UUID id) {
         return repository.findById(id)
                 .map(location -> new LocationResponse(
                         location.getId(),
@@ -67,5 +67,10 @@ public class LocationService {
                 saved.getAddress(),
                 saved.getCapacity()
         );
+    }
+
+    public void DeleteLocation(UUID id) {
+        Location location = repository.findById(id).orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
+        repository.delete(location);
     }
 }
