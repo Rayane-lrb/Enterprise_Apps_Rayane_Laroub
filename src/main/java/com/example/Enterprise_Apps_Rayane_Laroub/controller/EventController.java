@@ -1,11 +1,14 @@
 package com.example.Enterprise_Apps_Rayane_Laroub.controller;
 
+import com.example.Enterprise_Apps_Rayane_Laroub.dto.event.EventRequest;
 import com.example.Enterprise_Apps_Rayane_Laroub.dto.event.EventResponse;
 import com.example.Enterprise_Apps_Rayane_Laroub.entity.Event;
 import com.example.Enterprise_Apps_Rayane_Laroub.service.EventService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class EventController {
@@ -22,10 +25,18 @@ public class EventController {
         return service.findAll();
     }
 
-    @PostMapping
+    @GetMapping
     @RequestMapping("/events/{id}")
-    public EventResponse findById(@PathVariable int id) {
+    public EventResponse findById(@PathVariable UUID id) {
         return service.findById(id);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public EventResponse save(EventRequest request) {
+        return service.save(request);
+    }
+
+
 
 }
