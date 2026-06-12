@@ -7,6 +7,7 @@ import com.example.Enterprise_Apps_Rayane_Laroub.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EventService {
@@ -52,5 +53,30 @@ public class EventService {
                 saved.getLocation()
         );
     }
+
+    public EventResponse update(UUID id, EventRequest request) {
+        Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Event not found with id: " + id));
+
+        event.setTime(request.time());
+        event.setTitle(request.title());
+        event.setDescription(request.description());
+        event.setOrgnisation(request.organisation());
+        event.setEmail(request.email());
+        event.setLocation(request.location());
+
+        Event saved = eventRepository.save(event);
+
+        return new EventResponse(
+                saved.getId(),
+                saved.getTime(),
+                saved.getTitle(),
+                saved.getDescription(),
+                saved.getOrganisation(),
+                saved.getEmail(),
+                saved.getLocation()
+        );
+    }
+
+
 
 }
