@@ -52,4 +52,20 @@ public class LocationService {
         return repository.save(location);
 
     }
+
+    public LocationResponse UpdateLocation(UUID id, LocationRequest locationRequest) {
+        Location location = repository.findById(id).orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
+
+        location.setName(locationRequest.name());
+        location.setAddress(locationRequest.address());
+        location.setCapacity(locationRequest.capacity());
+        Location saved = repository.save(location);
+
+        return new LocationResponse(
+                saved.getId(),
+                saved.getName(),
+                saved.getAddress(),
+                saved.getCapacity()
+        );
+    }
 }
