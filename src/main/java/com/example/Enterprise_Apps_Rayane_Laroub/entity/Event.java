@@ -25,11 +25,11 @@ public class Event {
     @Column(name = "email", nullable = false)
     String email;
 
-    @Column(name = "organisation")
+    @Column(name = "organisation", nullable = false)
     String organisation;
 
     @ManyToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", nullable = false)
     Location location;
 
 

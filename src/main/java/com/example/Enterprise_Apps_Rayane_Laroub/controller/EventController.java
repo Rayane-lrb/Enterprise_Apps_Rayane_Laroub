@@ -44,5 +44,4 @@ public class EventController {
         model.addAttribute("event", eventService.save(event));
         return "redirect:/";
     }
-
 }
